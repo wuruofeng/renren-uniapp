@@ -1,0 +1,101 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus": {
+					"bounce": "none" // 可选: 是否禁止iOS回弹和Android触顶触底的弧形阴影, 默认允许 (可配在 'globalStyle')
+				},
+				"mp-alipay": {
+					"allowsBounceVertical": "NO" // 可选: 取消支付宝和钉钉小程序的iOS回弹 (可配在 'globalStyle')
+				}
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"titleNView": false
+			}
+		},
+		{
+			"path": "pages/index/project/detail-project"
+		},
+		{
+			"path": "pages/index/project/adjust-project"
+		},
+		{
+			"path": "pages/index/user/detail-user"
+		},
+		{
+			"path": "pages/file/file-preview"
+		},
+		{
+			"path": "pages/project/index"
+		},
+		{
+			"path": "pages/project/project-detail"
+		},
+		{
+			"path": "pages/analysis/index"
+		},
+		{
+			"path": "pages/user/index"
+		},
+		{
+			"path": "pages/user/setting"
+		},
+		{
+			"path": "pages/yzcloud/index"
+		},
+		{
+			"path": "pages/file/file-upload"
+		},
+		{
+			"path": "pages/yzcloud/yz-preview-callback"
+		},
+		{
+			"path": "pages/yzcloud/yz-edit"
+		}
+	],
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#4364F7",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/img/tabbar/todo.png",
+			"selectedIconPath": "static/img/tabbar/todoHL.png"
+		}, {
+			"pagePath": "pages/yzcloud/index",
+			"iconPath": "static/img/tabbar/yz.png",
+			"selectedIconPath": "static/img/tabbar/yzHL.png"
+		}, {
+			"pagePath": "pages/project/index",
+			"iconPath": "static/img/tabbar/project.png",
+			"selectedIconPath": "static/img/tabbar/projectHL.png"
+		}, {
+			"pagePath": "pages/analysis/index",
+			"iconPath": "static/img/tabbar/tongji.png",
+			"selectedIconPath": "static/img/tabbar/tongjiHL.png"
+		}, {
+			"pagePath": "pages/user/index",
+			"iconPath": "static/img/tabbar/user.png",
+			"selectedIconPath": "static/img/tabbar/userHL.png"
+		}]
+	},
+	"globalStyle": {
+		// "navigationBarTextStyle": "white",
+		// "navigationBarTitleText": "uniapp-admin",
+		// "navigationBarBackgroundColor": "#4364F7",
+		// "backgroundColor": "#F8F8F8"
+		// "mp-alipay": {
+		// 	/* 支付宝小程序特有相关 */
+		// 	"transparentTitle": "always",
+		// 	"allowsBounceVertical": "NO"
+		// },
+		// "navigationBarBackgroundColor": "#0081ff",
+		// "navigationBarTitleText": "uniapp-admin",
+		// "navigationStyle": "custom",
+		// "navigationBarTextStyle": "white"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"name": "uniapp-admin",
+	"version": "2.1.0",
+	"main": "index.js",
+	"repository": "https://github.com/silianpan/uniapp-admin.git",
+	"author": "silianpan <liu.pan@silianpan.cn>",
+	"license": "MIT",
+	"dependencies": {
+		"crypto-js": "^4.0.0",
+		"lodash": "^4.17.21",
+		"vue-i18n": "^8.23.0"
+	}
+}
