@@ -294,7 +294,7 @@
 					this.classArr_obj[item.classId] = item;
 				});
 				this.classRoomArr.forEach(item => {
-					this.classRoomArr_obj[item.classRoomId] = item;
+					this.classRoomArr_obj[item.classroomId] = item;
 				});
 				this.unionArr.forEach(item => {
 					this.unionArr_obj[item.unionId] = item;
@@ -307,12 +307,16 @@
 				this.relaArr = f_relaArr;
 				// 置换
 				this.relaArr.forEach(item =>{
-					item.taskId = this.taskArr_obj[item.taskId];
-					item.taskId.unionId = this.unionArr_obj[item.taskId.unionId];
-					item.taskId.unionId.classId = this.classArr_obj[item.taskId.unionId.classId];
-					item.taskId.unionId.courseId = this.courseArr_obj[item.taskId.unionId.courseId];
-					item.taskId.unionId.teacherId = this.teachersArr_obj[item.taskId.unionId.teacherId];
-
+					let tmp_taskId = item.taskId;
+					item.taskId = Object.assign({},this.taskArr_obj[tmp_taskId]); 
+					let tmp_unionId = item.taskId.unionId;
+					item.taskId.unionId = Object.assign({},this.unionArr_obj[tmp_unionId]);
+					let tmp_classId = item.taskId.unionId.classId;
+					item.taskId.unionId.classId = Object.assign({},this.classArr_obj[tmp_classId]);
+					let tmp_courseId = item.taskId.unionId.courseId;
+					item.taskId.unionId.courseId = Object.assign({},this.courseArr_obj[tmp_courseId]);
+					let tmp_teacherId = item.taskId.unionId.teacherId;
+					item.taskId.unionId.teacherId = Object.assign({},this.teachersArr_obj[tmp_teacherId]);
 				})
 				// 塞到session里面
 				sessionStorage.setItem('baseList',JSON.stringify(this.relaArr));
