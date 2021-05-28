@@ -3,7 +3,7 @@
 	<view style="margin-bottom: 100rpx">
 		<mescroll-body ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback">
 			<view class="mycard">
-				<view v-for="item in cardList" :key="item.id" class="card-item">
+				<view v-for="item in cardList" :key="item.id" class="card-item" v-if="false">
 					<uni-card is-full :title="item.projectType" is-shadow note="true" :extra="item.createTime"
 						:thumbnail="`/static/img/project/${formatProjectType(item.projectType)}`"
 						@tapHeader="clickCard(item)">
@@ -57,6 +57,41 @@
 						</template>
 					</uni-card>
 				</view>
+				<view v-for="(item,index) in relaArr" :key="index" class="card-item">
+					<uni-card is-full :title="item.taskId.unionId.courseId.courseName" is-shadow 
+						:thumbnail="`/static/img/project/build.png`"
+						@tapHeader="clickCard(item)" v-if="item.taskId.unionId">
+						<view class="audit-card-content">
+							<view class="uni-flex uni-row" @tap="clickCard(item)">
+								<view class="flex-item-20">课程名</view>
+								<view class="flex-item-80">{{item.taskId.unionId.courseId.courseName}}</view>
+							</view>
+							<view class="uni-flex uni-row" @tap="clickCard(item)">
+								<view class="flex-item-20">日期</view>
+								<view class="flex-item-80">{{item.taskId.time}}</view>
+							</view>
+							<view class="uni-flex uni-row" @tap="clickCard(item)">
+								<view class="flex-item-20">教室</view>
+								<view class="flex-item-80">{{item.taskId.unionId.classroomId}}</view>
+							</view>
+							<view class="uni-flex uni-row" @tap="clickCard(item)">
+								<view class="flex-item-20">教师名</view>
+								<view class="flex-item-80">{{item.taskId.unionId.teacherId.teacherName}}</view>
+							</view>
+							<view class="uni-flex uni-row" @tap="clickCard(item)">
+								<view class="flex-item-20">节数</view>
+								<view class="flex-item-80">{{item.taskId.unionId.orderNum}}</view>
+							</view>
+							<view class="uni-flex uni-row" @tap="clickCard(item)">
+								<view class="flex-item-20">督导状态</view>
+								<view class="flex-item-80">
+									<uni-tag size="small" :text="formatAuditStatus(item.status).text"
+										:type="formatAuditStatus(item.status).color" :circle="true"></uni-tag>
+								</view>
+							</view>
+						</view>
+					</uni-card>
+				</view>
 			</view>
 		</mescroll-body>
 		<audit-idea ref="popupAuditIdeaRef" :isPass="isPass" :isPaddingBottom="true" @updateQuery="updateQuery">
@@ -92,13 +127,34 @@
 				isPass: false,
 				selectedProject: {},
 				// 列表数据
-				cardList: []
+				cardList: [],
+				// 渲染数据
+				renderList:[],
+				//
+
+				teachersArr:[],
+				teachersArr_obj:{},
+				courseArr:[],
+				courseArr_obj:{},
+				classArr:[],
+				classArr_obj:{},
+				classRoomArr:[],
+				classRoomArr_obj:{},
+				taskArr:[],
+				taskArr_obj:{},
+				relaArr:[],
+				unionArr:[],
+				unionArr_obj:{},
+
 			}
 		},
 		methods: {
 			filePreview,
 			formatAuditStatus,
 			formatProjectType,
+			refresh(){
+				location.reload();
+			},
 			/* 上拉加载的回调: 其中page.num:当前页 从1开始, page.size:每页数据条数,默认10 */
 			upCallback(page) {
 				if (!this.user) {
@@ -118,7 +174,7 @@
 			},
 			clickCard(item) {
 				uni.navigateTo({
-					url: '/pages/index/project/detail-project?data=' + JSON.stringify(item)
+					url: '/pages/index/project/detail-project?relateId=' + item.relateId + '&union_id=' + item.taskId.unionId.unionId + '&status=' + item.status
 				})
 			},
 			adjustClick(item) {
@@ -148,8 +204,125 @@
 			},
 			updateQuery() {
 				this.queryByName()
-			}
-		}
+			},
+			/******************
+			 * 首先获取各种原子表
+			*******************/
+			async getTeacher(){
+				let res = [];
+				res = await this.$minApi.getTeacherList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+			async getCourse(){
+				let res = [];
+				res = await this.$minApi.getCourseList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+			async getClass(){
+				let res = [];
+				res = await this.$minApi.getClassList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+			async getClassRoom(){
+				let res = [];
+				res = await this.$minApi.getClassRoomList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+			/******************
+			 * 开搞
+			*******************/
+			async getTask(){
+				let res = [];
+				res = await this.$minApi.getTaskList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+			async getRela(){
+				let res = [];
+				res = await this.$minApi.getRelaList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+			async getUnion(){
+				let res = [];
+				res = await this.$minApi.getUnionList().then(res=>{
+					if (res.code == '200') {
+						return res.page.list;
+					}
+				})
+				return res;
+			},
+		},
+		async beforeMount(e) {
+				this.teachersArr = await this.getTeacher();
+				this.courseArr = await this.getCourse();
+				this.classArr = await this.getClass();
+				this.classRoomArr = await this.getClassRoom();
+				this.taskArr = await this.getTask();
+				this.relaArr = await this.getRela();
+				this.unionArr = await this.getUnion();
+				// format
+				this.teachersArr.forEach(item => {
+					this.teachersArr_obj[item.teacherId] = item;
+				});
+				this.courseArr.forEach(item => {
+					this.courseArr_obj[item.courseId] = item;
+				});
+				this.classArr.forEach(item => {
+					this.classArr_obj[item.classId] = item;
+				});
+				this.classRoomArr.forEach(item => {
+					this.classRoomArr_obj[item.classRoomId] = item;
+				});
+				this.unionArr.forEach(item => {
+					this.unionArr_obj[item.unionId] = item;
+				});
+				this.taskArr.forEach(item => {
+					this.taskArr_obj[item.taskId] = item;
+				});
+				// Filter
+				const f_relaArr = this.relaArr.filter(item => item.userId == this.user.userid);
+				this.relaArr = f_relaArr;
+				// 置换
+				this.relaArr.forEach(item =>{
+					item.taskId = this.taskArr_obj[item.taskId];
+					item.taskId.unionId = this.unionArr_obj[item.taskId.unionId];
+					item.taskId.unionId.classId = this.classArr_obj[item.taskId.unionId.classId];
+					item.taskId.unionId.courseId = this.courseArr_obj[item.taskId.unionId.courseId];
+					item.taskId.unionId.teacherId = this.teachersArr_obj[item.taskId.unionId.teacherId];
+
+				})
+				// 塞到session里面
+				sessionStorage.setItem('baseList',JSON.stringify(this.relaArr));
+				console.log('relaArr',this.relaArr);
+				
+		},
+		mounted(){
+			// console.log('😀😀😀😀😀😀😀data',this._data);
+			
+		},
 	}
 </script>
 

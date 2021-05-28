@@ -8,25 +8,31 @@
 		<view class="padding-lr padding-tb-xs">
 			<view class="uni-flex uni-row">
 				<view class="flex-item-30">{{$t('UserName')}}</view>
-				<view class="flex-item-70">{{user?user.name:''}}</view>
+				<view class="flex-item-70">{{user?user.username:''}}</view>
 			</view>
 		</view>
 		<view class="padding-lr padding-tb-xs">
 			<view class="uni-flex uni-row">
 				<view class="flex-item-30">{{$t('Name')}}</view>
-				<view class="flex-item-70">{{user?user.userName:''}}</view>
+				<view class="flex-item-70">{{userInfo?userInfo.userFullname:''}}</view>
 			</view>
 		</view>
 		<view class="padding-lr padding-tb-xs">
 			<view class="uni-flex uni-row">
-				<view class="flex-item-30">{{$t('Role')}}</view>
-				<view class="flex-item-70">{{user?user.roleStr:''}}</view>
+				<view class="flex-item-30">{{$t('Phone')}}</view>
+				<view class="flex-item-70">{{userInfo?userInfo.mobile:''}}</view>
+			</view>
+		</view>
+		<view class="padding-lr padding-tb-xs">
+			<view class="uni-flex uni-row">
+				<view class="flex-item-30">{{$t('Email')}}</view>
+				<view class="flex-item-70">{{userInfo?userInfo.email:''}}</view>
 			</view>
 		</view>
 		<view class="padding-lr padding-tb-xs">
 			<button class="cu-btn block shadow bg-gradual-pink margin" @tap="tapSettings">{{$t('Settings')}}</button>
-			<button class="cu-btn block shadow bg-gradual-blue margin" @tap="modifyPass">{{$t('ChangePassword')}}</button>
-			<button class="cu-btn block shadow bg-gradual-orange margin" @tap="appUpgrade">{{$t('Upgrade')}}</button>
+			<!-- <button class="cu-btn block shadow bg-gradual-blue margin" @tap="modifyPass">{{$t('ChangePassword')}}</button> -->
+			<!-- <button class="cu-btn block shadow bg-gradual-orange margin" @tap="appUpgrade">{{$t('Upgrade')}}</button> -->
 			<button class="cu-btn block shadow bg-white margin text-red" @tap="logout">{{$t('SignOut')}}</button>
 		</view>
 		<view v-if="appInfo.version" class="text-grey text-center">
@@ -76,7 +82,8 @@
 				item: {
 					oldPassword: '',
 					newPassword: ''
-				}
+				},
+				userInfo:{}
 			}
 		},
 		onShow() {
@@ -95,6 +102,11 @@
 				this.appInfo.name = wgtinfo.name
 			})
 			//#endif
+			this.$minApi.getUserInfoByUserName(this.user.username).then(res=>{
+				if (res.code == '200') {
+					this.userInfo = res.user;
+				}
+			})
 		},
 		methods: {
 			initTheme() {

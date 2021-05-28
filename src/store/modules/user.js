@@ -18,16 +18,18 @@ export default {
 	},
 	actions: {
 		autoLogin({ commit, getters, dispatch }) {
+			console.log('autoLogin', getters.user);
 			// 判断本地是否有账号信息，如果有，就自动重新登录
-			if (getters.user && getters.user.id && getters.user.name && getters.user.passwd) {
+			if (getters.user && getters.user.username && getters.user.password) {
 				const params = {
-					name: getters.user.name,
-					passwd: getters.user.passwd
+					username: getters.user.username,
+					password: getters.user.password
 				}
 				uni.showLoading({
 					title: '自动登录中...'
 				})
 				dispatch('login', params).then(res => {
+					sessionStorage.setItem('token', res.token);
 					uni.hideLoading()
 					// uni.showToast({
 					// 	title: '已自动登录！',
@@ -66,9 +68,9 @@ export default {
 			return new Promise((resolve, reject) => {
 				Vue.prototype.$minApi.login(params).then(res => {
 					if (res.ok()) {
-						let tmp = { ...params, ...res.data }
+						let tmp = { ...params, ...res}
+						sessionStorage.setItem('userInfo',JSON.stringify(tmp));
 						commit('login', tmp)
-
 						// 关于消息推送的保存
 						// 保存clientid到服务器
 						// #ifdef APP-PLUS

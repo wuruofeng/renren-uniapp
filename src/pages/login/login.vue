@@ -51,6 +51,8 @@
 				if (params) {
 					this.isRotate = true
 					this.$store.dispatch('login', params).then(res => {
+						sessionStorage.setItem('token',res.token);
+						// window.token = res.token;
 						this.isRotate = false
 						uni.reLaunch({
 							url: '/pages/index/index',
@@ -85,8 +87,8 @@
 
 				// 网络请求
 				const params = {
-					name: this.phoneData,
-					passwd: md5(this.passData)
+					username: this.phoneData,
+					password: this.passData
 				}
 				this.login(params)
 			}

@@ -1,5 +1,6 @@
 export default {
-	'ProjectApproval': '项目审批',
+	'ProjectApproval': '评价表填写',
+	'ProjectWatch': '评价表查看',
 	'ProjectAdjust': '项目调整',
 	'UserApproval': '用户审批',
 	'FilePreview': '文件预览',
@@ -21,6 +22,8 @@ export default {
 	'UserName': '用户名',
 	'Name': '姓名',
 	'Role': '角色',
+	'Phone':'手机',
+	'Email':'邮箱',
 	'RegisteredUser': '注册用户',
 	'ProjectThisMonth': '本月项目',
 	'Ok': '确认',

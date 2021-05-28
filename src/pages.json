@@ -65,23 +65,27 @@
 			"pagePath": "pages/index/index",
 			"iconPath": "static/img/tabbar/todo.png",
 			"selectedIconPath": "static/img/tabbar/todoHL.png"
-		}, {
-			"pagePath": "pages/yzcloud/index",
-			"iconPath": "static/img/tabbar/yz.png",
-			"selectedIconPath": "static/img/tabbar/yzHL.png"
-		}, {
-			"pagePath": "pages/project/index",
-			"iconPath": "static/img/tabbar/project.png",
-			"selectedIconPath": "static/img/tabbar/projectHL.png"
-		}, {
-			"pagePath": "pages/analysis/index",
-			"iconPath": "static/img/tabbar/tongji.png",
-			"selectedIconPath": "static/img/tabbar/tongjiHL.png"
-		}, {
+		}, 
+		// {
+		// 	"pagePath": "pages/yzcloud/index",
+		// 	"iconPath": "static/img/tabbar/yz.png",
+		// 	"selectedIconPath": "static/img/tabbar/yzHL.png"
+		// }, 
+		// {
+		// 	"pagePath": "pages/project/index",
+		// 	"iconPath": "static/img/tabbar/project.png",
+		// 	"selectedIconPath": "static/img/tabbar/projectHL.png"
+		// }, {
+		// 	"pagePath": "pages/analysis/index",
+		// 	"iconPath": "static/img/tabbar/tongji.png",
+		// 	"selectedIconPath": "static/img/tabbar/tongjiHL.png"
+		// }, 
+		{
 			"pagePath": "pages/user/index",
 			"iconPath": "static/img/tabbar/user.png",
 			"selectedIconPath": "static/img/tabbar/userHL.png"
-		}]
+		}
+	]
 	},
 	"globalStyle": {
 		// "navigationBarTextStyle": "white",

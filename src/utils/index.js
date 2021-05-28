@@ -66,24 +66,17 @@ export const formatAuditStatus = status => {
 	let text = ''
 	let color = ''
 	switch (status) {
-		case '-1':
+		case 0:
 			;
 			(() => {
 				text = '未提交'
 				color = 'primary'
 			})()
 			break
-		case '0':
+		case 1:
 			;
 			(() => {
-				text = '不通过'
-				color = 'error'
-			})()
-			break
-		case '1':
-			;
-			(() => {
-				text = '通过'
+				text = '已完成'
 				color = 'success'
 			})()
 			break

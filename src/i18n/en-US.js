@@ -1,5 +1,6 @@
 export default {
 	'ProjectApproval': 'Project Approval',
+	'ProjectWatch':'ProjectWatch',
 	'ProjectAdjust': 'Project Adjust',
 	'UserApproval': 'User Approval',
 	'FilePreview': 'File Previewing',
@@ -27,6 +28,8 @@ export default {
 	'UserName': 'UserName',
 	'Name': 'Name',
 	'Role': 'Role',
+	'Email':'Email',
+	'Phone':'Phone',
 	'RegisteredUser': 'Registered user',
 	'ProjectThisMonth': 'Project this month',
 	'System': 'System',

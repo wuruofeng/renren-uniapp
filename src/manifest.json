@@ -196,6 +196,14 @@
                     "pathRewrite" : {
                         "^/apiYzEic" : ""
                     }
+                },
+                "/app" : {
+                    "target" : "http://localhost:8080/renren-fast",
+                    "changeOrigin" : true,
+                    "secure" : false,
+                    "pathRewrite" : {
+                        "^/app" : ""
+                    }
                 }
             }
         },

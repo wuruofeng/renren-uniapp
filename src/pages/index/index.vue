@@ -1,14 +1,14 @@
 <template>
 	<view>
-		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
+		<!-- <uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
 			<view class="input-view">
 				<uni-icons type="search" size="22" color="#666666" />
 				<input v-model="searchVal" confirm-type="search" class="input" type="text" placeholder="搜索项目/机构" @confirm="search">
 				<uni-icons :color="'#999999'" v-if="searchVal!==''" class="icon-clear" type="clear" size="22" @click="clear" />
 			</view>
-		</uni-nav-bar>
+		</uni-nav-bar> -->
 
-		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
+		<!-- <uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
 			<scroll-view scroll-x scroll-with-animation :scroll-left="scrollLeft" style="z-index: 9999;">
 				<view class="tui-tabs-view tui-tabs-relative text-white" style="height:80rpx;padding:0 30rpx;top:auto" :style="{backgroundColor:themeBgColor}">
 					<view v-for="(item, index) in tabbar" :key="index" class="tui-tabs-item" style="width:50%" @tap.stop="swichNav(index)">
@@ -18,18 +18,18 @@
 					<view class="tui-tabs-slider" :style="{transform:'translateX('+scrollLeft+'px)',width:'68rpx',height:'6rpx',bottom:'0rpx',background:'#ffffb8'}"></view>
 				</view>
 			</scroll-view>
-		</uni-nav-bar>
+		</uni-nav-bar> -->
 		<swiper :class="darkMode?'custom-dark':'custom-light'" class="tab-content" :current="currentTab" duration="300" @change="switchTab" :style="{height:winHeight+'px'}">
 			<swiper-item>
 				<scroll-view scroll-y class="scoll-y">
 					<audit-project ref="auditProjectRef"></audit-project>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item>
+			<!-- <swiper-item>
 				<scroll-view scroll-y class="scoll-y">
 					<audit-user ref="auditUserRef"></audit-user>
 				</scroll-view>
-			</swiper-item>
+			</swiper-item> -->
 		</swiper>
 	</view>
 </template>
@@ -104,6 +104,9 @@
 			}
 		},
 		methods: {
+			refresh(){
+				location.reload();
+			},
 			setDarkMode() {
 				this.darkMode ? uni.setTabBarStyle({
 				  backgroundColor: '#2a2b2d'

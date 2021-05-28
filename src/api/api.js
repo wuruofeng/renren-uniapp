@@ -25,7 +25,9 @@ export default {
 	// 这里统一管理api请求
 	apis: {
 		login(params) {
-			return minRequest.post('/post/user/login', params)
+			return minRequest.post('/sys/login', params,{
+				baseURL : '/app'
+			})
 		},
 		userPwdModify(params) {
 			return minRequest.post('/post/user/pwd/modify', params)
@@ -35,9 +37,17 @@ export default {
 			return minRequest.get('/get/audit/project/list')
 		},
 		// 用户审批列表
-		listAuditUser() {
-			return minRequest.get('/get/audit/user/list')
-		},
+		// listAuditUser() {
+		// 	return minRequest.get('/get/audit/user/list')
+		// },
+		// listAuditProject() {
+		// 	return minRequest.get('/generator/task/list',{},{
+		// 		baseURL: '/app',
+		// 		header: {
+					// 'token': sessionStorage.getItem('token')
+		// 		}
+		// 	})
+		// },
 		// 文档管理接口：HTTP上传文件
 		yzEditHttpUploadFile({ fileUrl }) {
 			const sign = generateSign(globalConfig.yzEditAPPKEY, {"appId": [globalConfig.yzEditAPPID],
@@ -67,28 +77,96 @@ export default {
 					'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
 				}
 			})
+		},
+		// 获取用户信息
+		getUserInfoByUserName(userName){
+			return minRequest.get('/sys/user/getInfoByUsername/' + userName,{},{
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取老师信息
+		getTeacherList(){
+			return minRequest.get('/generator/teacher/list', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取course
+		getCourseList(){
+			return minRequest.get('/generator/course/list', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取class
+		getClassList(){
+			return minRequest.get('/generator/class/list', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取classRoom
+		getClassRoomList() {
+			return minRequest.get('/generator/classroom/list', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取task表
+		getTaskList() {
+			return minRequest.get('/generator/task/list1', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取rela表
+		getRelaList() {
+			return minRequest.get('/generator/relatetasksupervisor/list1', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取union表
+		getUnionList() {
+			return minRequest.get('/generator/courseteacherclassroom/list1', {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// 获取评价表
+		getevaluateList(relateId) {
+			return minRequest.get('/generator/evaluate/relatedetail/' + relateId, {}, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
+		},
+		// save evaluate表格
+		saveEvaluate(params){
+			return minRequest.post('/generator/evaluate/save', params, {
+				baseURL: '/app',
+				header: {
+					'token': sessionStorage.getItem('token')
+				}
+			});
 		}
-		// 文档管理接口：上传文件
-		// yzPreviewUploadFile({ file }) {
-		// 	const sign = ''
-		// 	return minRequest.post('/api/file/upload', {
-		// 		file,
-		// 		appId: globalConfig.yzPreviewAPPID,
-		// 		sign
-		// 	}, {
-		// 		baseURL: globalConfig.yzDmcUrl
-		// 	})
-		// },
-		// 永中云预览-在线预览
-		// yzPreviewFile({ fileVersionId }) {
-		// 	const sign = ''
-		// 	return minRequest.get('/api/view/file', {
-		// 		fileVersionId,
-		// 		appId: globalConfig.yzPreviewAPPID,
-		// 		sign
-		// 	}, {
-		// 		baseURL: globalConfig.yzEicUrl
-		// 	})
-		// }
 	}
 }
