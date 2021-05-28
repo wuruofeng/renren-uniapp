@@ -106,7 +106,7 @@ export const checkStatus = (response = {}) => {
 		status,
 		statusText
 	} = response
-	if (status === 200 || status === 304) {
+	if (status === 0 || status === 304) {
 		return response.data
 	} else {
 		let msg = HttpErrorCode[status] || statusText
@@ -149,7 +149,7 @@ export const checkResult = (result) => {
 	result.ok = function() {
 		return false
 	}
-	if (code === 200) {
+	if (code === 0) {
 		result.ok = function() {
 			return true
 		}

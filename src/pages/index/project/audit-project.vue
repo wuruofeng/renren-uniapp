@@ -211,7 +211,7 @@
 			async getTeacher(){
 				let res = [];
 				res = await this.$minApi.getTeacherList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})
@@ -220,7 +220,7 @@
 			async getCourse(){
 				let res = [];
 				res = await this.$minApi.getCourseList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})
@@ -229,7 +229,7 @@
 			async getClass(){
 				let res = [];
 				res = await this.$minApi.getClassList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})
@@ -238,7 +238,7 @@
 			async getClassRoom(){
 				let res = [];
 				res = await this.$minApi.getClassRoomList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})
@@ -250,7 +250,7 @@
 			async getTask(){
 				let res = [];
 				res = await this.$minApi.getTaskList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})
@@ -259,7 +259,7 @@
 			async getRela(){
 				let res = [];
 				res = await this.$minApi.getRelaList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})
@@ -268,7 +268,7 @@
 			async getUnion(){
 				let res = [];
 				res = await this.$minApi.getUnionList().then(res=>{
-					if (res.code == '200') {
+					if (res.code == '0') {
 						return res.page.list;
 					}
 				})

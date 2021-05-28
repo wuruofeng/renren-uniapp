@@ -312,7 +312,7 @@
 				this.buttonGroup[0].backgroundColor = "#808080";
 				//去拿一下评价表
 				this.$minApi.getevaluateList(relateId).then(res=>{
-						if (res.code == '200') {
+						if (res.code == '0') {
 							let dto = res.evaluateDetailRspDTO;
 							this.renderCfg.teacherName = dto.teacherInfoRspDTO.teacherName;
 							this.renderCfg.teacherTitle = dto.teacherInfoRspDTO.teacherTitle;
@@ -425,7 +425,7 @@
 					}
 					let res = [];
 					res = await this.$minApi.saveEvaluate(params).then(res=>{
-						if (res.code == '200') {
+						if (res.code == '0') {
 							uni.switchTab({
 								url: '/pages/index/index',
 								success(){

@@ -103,7 +103,7 @@
 			})
 			//#endif
 			this.$minApi.getUserInfoByUserName(this.user.username).then(res=>{
-				if (res.code == '200') {
+				if (res.code == '0') {
 					this.userInfo = res.user;
 				}
 			})
